@@ -6,6 +6,7 @@ import TradingPanel from '@/components/TradingPanel';
 import TransactionHistory from '@/components/TransactionHistory';
 import { useMarketData } from '@/components/hooks/useMarketData';
 import { ClientWalletButton } from '@/components/ClientWalletButton';
+import OnRampModal from '@/components/OnRampModal';
 
 const UP = '#12a86d';
 const DOWN = '#f6465d';
@@ -30,7 +31,10 @@ export default function DashboardPage() {
             Phoenix · Solana
           </span>
         </div>
-        <ClientWalletButton />
+        <div className="flex items-center gap-2">
+          <OnRampModal />
+          <ClientWalletButton />
+        </div>
       </header>
 
       {/* Strip ticker */}
