@@ -3,12 +3,32 @@
 import { useState, useEffect } from 'react';
 import { getMarketDataAction } from '@/app/actions';
 
+export type Candle = {
+  time: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+};
+
+export type OrderLevel = {
+  price: number;
+  size: number;
+};
+
+type MarketInfo = {
+  data: Candle[];
+  bids: OrderLevel[];
+  asks: OrderLevel[];
+  loading: boolean;
+};
+
 export function useMarketData() {
-  const [marketInfo, setMarketInfo] = useState({ 
-    data: [], 
-    bids: [], 
-    asks: [], 
-    loading: true 
+  const [marketInfo, setMarketInfo] = useState<MarketInfo>({
+    data: [],
+    bids: [],
+    asks: [],
+    loading: true
   });
 
   useEffect(() => {
