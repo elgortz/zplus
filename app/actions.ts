@@ -5,7 +5,8 @@ import * as PhoenixSDK from '@ellipsis-labs/phoenix-sdk';
 
 // Konfigurasi koneksi
 const RPC_ENDPOINT = "https://mainnet.helius-rpc.com/?api-key=47e352bb-dcfa-4e21-b171-d7584cb83f2a"; 
-const MARKET_ID = new PublicKey("5uvs6B63Y6fS6dC2S5g7r163L1Gq5yvH1nN6Gv6v6v6v");
+// Market SOL/USDC resmi Phoenix di mainnet-beta (sumber: master_config.json Ellipsis Labs)
+const MARKET_ID = new PublicKey("4DoNfFBfF7UokCC2FQzriy7yHK6DY6NVdYpuekQ5pRgg");
 
 export async function getMarketDataAction() {
   try {
