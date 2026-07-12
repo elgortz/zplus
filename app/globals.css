@@ -1,5 +1,7 @@
-@import "tailwindcss";
+/* Diimpor lebih dulu karena file ini berisi @import font Google di baris
+   pertamanya — @import harus mendahului semua rule lain di bundel akhir. */
 @import '@solana/wallet-adapter-react-ui/styles.css';
+@import "tailwindcss";
 :root {
   --background: #ffffff;
   --foreground: #171717;
