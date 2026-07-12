@@ -14,14 +14,17 @@ export default function TradingChart() {
 
     // 1. Inisialisasi Chart HANYA SEKALI
     if (!chartRef.current) {
-      import('lightweight-charts').then(({ createChart }) => {
+      import('lightweight-charts').then(({ createChart, CandlestickSeries, ColorType }) => {
         chartRef.current = createChart(chartContainerRef.current!, {
           width: chartContainerRef.current!.clientWidth,
           height: 350,
-          layout: { backgroundColor: '#131722', textColor: '#d1d5db' },
+          layout: {
+            background: { type: ColorType.Solid, color: '#131722' },
+            textColor: '#d1d5db',
+          },
         });
 
-        seriesRef.current = chartRef.current.addCandlestickSeries({
+        seriesRef.current = chartRef.current.addSeries(CandlestickSeries, {
           upColor: '#26a69a',
           downColor: '#ef5350',
         });
