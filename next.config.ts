@@ -1,10 +1,5 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  // Tambahkan baris di bawah ini
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

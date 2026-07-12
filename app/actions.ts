@@ -11,24 +11,19 @@ export async function getMarketDataAction() {
   try {
     const connection = new Connection(RPC_ENDPOINT);
     
-    // Inisialisasi Client Phoenix
-    const client = await PhoenixSDK.Client.create(connection);
-    
-    // Memuat Market
-    // Catatan: Jika getMarket() error, kemungkinan versi SDK Anda memerlukan method berbeda
-    // Kami mencoba memanggilnya secara aman di sini.
-    const market = await client.getMarket(MARKET_ID);
-    
-    // Memuat Order Book
-    const book = await market.loadBook(connection); 
-    
+    // Inisialisasi Client Phoenix (hanya memuat market yang dibutuhkan)
+    const client = await PhoenixSDK.Client.createWithMarketAddresses(connection, [MARKET_ID]);
+
+    // Memuat Order Book (5 level teratas per sisi)
+    const ladder = client.getUiLadder(MARKET_ID.toBase58(), 5);
+
     // Log di terminal untuk memastikan data masuk
-    console.log(`DEBUG: Berhasil mengambil data. Bids: ${book.bids.length}, Asks: ${book.asks.length}`);
-    
+    console.log(`DEBUG: Berhasil mengambil data. Bids: ${ladder.bids.length}, Asks: ${ladder.asks.length}`);
+
     return {
-      price: book.bids.length > 0 ? Number(book.bids[0].price) : 150,
-      bids: book.bids.slice(0, 5).map(b => ({ price: Number(b.price), size: Number(b.size) })),
-      asks: book.asks.slice(0, 5).map(a => ({ price: Number(a.price), size: Number(a.size) })),
+      price: ladder.bids.length > 0 ? ladder.bids[0].price : 150,
+      bids: ladder.bids.map(b => ({ price: b.price, size: b.quantity })),
+      asks: ladder.asks.map(a => ({ price: a.price, size: a.quantity })),
       success: true
     };
     

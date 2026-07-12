@@ -18,7 +18,7 @@ export default function TradingChart() {
         chartRef.current = createChart(chartContainerRef.current!, {
           width: chartContainerRef.current!.clientWidth,
           height: 350,
-          layout: { background: { color: '#131722' }, textColor: '#d1d5db' },
+          layout: { backgroundColor: '#131722', textColor: '#d1d5db' },
         });
 
         seriesRef.current = chartRef.current.addCandlestickSeries({
